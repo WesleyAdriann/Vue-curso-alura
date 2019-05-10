@@ -3,9 +3,9 @@
     <h1 class="centralizado">{{ titulo }}</h1>
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of fotos" :key="foto.alt">
-
-        <img class="imagem-responsiva" :src="foto.url" :alt="foto.alt"/>
-
+        <Painel :titulo="foto.titulo">
+          <img class="imagem-responsiva" :src="foto.url" :alt="foto.alt"/>
+        </Painel>
 
       </li>
     </ul>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-
+import Painel from './components/shared/painel/Painel.vue';
 
 export default {
   data () {
@@ -26,6 +26,9 @@ export default {
     this.$http.get('http://localhost:3000/v1/fotos')
       .then(res => res.json())
       .then(fotos => this.fotos = fotos);
+  },
+  components: {
+    Painel,
   }
 }
 </script>
