@@ -1,13 +1,26 @@
 <template>
   <div clas="corpo">
+    <nav>
+      <ul>
+        <li v-for="route in routes" :key="route">
+          <!-- <router-link :to="route.path ? route.path : '/'"> -->
+          <router-link :to="route.path">{{ route.titulo }}</router-link>
+        </li>
+      </ul>
+    </nav>
     <router-view/>
   </div>
 </template>
 
 <script>
+import { routes } from './routes';
 
 export default {
-  
+  data () {
+    return {
+      routes
+    }
+  }
 }
 </script>
 
