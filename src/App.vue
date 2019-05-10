@@ -6,7 +6,7 @@
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of filtroFotos" :key="foto.alt">
         <Painel :titulo="foto.titulo">
-          <img class="imagem-responsiva" :src="foto.url" :alt="foto.alt"/>
+          <ImagemResponsiva :url="foto.url" :titulo="foto.titulo"/>
         </Painel>
 
       </li>
@@ -16,6 +16,7 @@
 
 <script>
 import Painel from './components/shared/painel/Painel.vue';
+import ImagemResponsiva from './components/shared/imagem-responsiva/ImagemResponsiva.vue';
 
 export default {
   data () {
@@ -32,6 +33,7 @@ export default {
   },
   components: {
     Painel,
+    ImagemResponsiva,
   },
   computed : {
     filtroFotos () {
@@ -60,9 +62,6 @@ export default {
   }
   .lista-fotos .lista-fotos-item{
     display: inline-block;
-  }
-  .imagem-responsiva {
-    width: 100%;
   }
   .filtro {
     display: block;
