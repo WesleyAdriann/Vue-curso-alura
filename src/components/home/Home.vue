@@ -7,6 +7,7 @@
       <li class="lista-fotos-item" v-for="foto of filtroFotos" :key="foto.indexOf">
         <Painel :titulo="foto.titulo">
           <ImagemResponsiva :url="foto.url" :titulo="foto.titulo"/>
+          <Botao tipo="button" rotulo="REMOVER" @botaoAtivado="remove(foto)"/>
         </Painel>
 
       </li>
@@ -17,6 +18,7 @@
 <script>
 import Painel from '../shared/painel/Painel.vue';
 import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue';
+import Botao from '../shared/botao/Botao.vue';
 
 export default {
   data () {
@@ -34,6 +36,7 @@ export default {
   components: {
     Painel,
     ImagemResponsiva,
+    Botao,
   },
   computed : {
     filtroFotos () {
@@ -43,6 +46,11 @@ export default {
       }else {
         return this.fotos;
       }
+    }
+  },
+  methods : {
+    remove(foto) {
+      alert('remove' + foto.titulo);
     }
   }
 }
