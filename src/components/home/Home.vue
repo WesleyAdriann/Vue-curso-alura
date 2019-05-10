@@ -4,7 +4,7 @@
     <input type="search" class="filtro" @input="filtro = $event.target.value" placeholder="Busca"/>
     
     <ul class="lista-fotos">
-      <li class="lista-fotos-item" v-for="foto of filtroFotos" :key="foto.alt">
+      <li class="lista-fotos-item" v-for="foto of filtroFotos" :key="foto.indexOf">
         <Painel :titulo="foto.titulo">
           <ImagemResponsiva :url="foto.url" :titulo="foto.titulo"/>
         </Painel>
