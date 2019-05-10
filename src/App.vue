@@ -1,5 +1,7 @@
 <template>
-
+  <div clas="corpo">
+    <router-view/>
+  </div>
 </template>
 
 <script>
