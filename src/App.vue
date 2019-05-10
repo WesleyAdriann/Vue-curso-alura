@@ -1,10 +1,10 @@
 <template>
   <div class="corpo">
     <h1 class="centralizado">{{ titulo }}</h1>
-    <input type="search" class="filtro" v-on:input="search = $event.target.value" placeholder="Busca"/>
-    {{ search }}
+    <input type="search" class="filtro" v-on:input="filtro = $event.target.value" placeholder="Busca"/>
+    
     <ul class="lista-fotos">
-      <li class="lista-fotos-item" v-for="foto of fotos" :key="foto.alt">
+      <li class="lista-fotos-item" v-for="foto of filtroFotos" :key="foto.alt">
         <Painel :titulo="foto.titulo">
           <img class="imagem-responsiva" :src="foto.url" :alt="foto.alt"/>
         </Painel>
@@ -22,7 +22,7 @@ export default {
     return {
       titulo: "Alura app",
       fotos : [],
-      search : "",
+      filtro : "",
     }
   },
   created() {
@@ -32,6 +32,16 @@ export default {
   },
   components: {
     Painel,
+  },
+  computed : {
+    filtroFotos () {
+      if(this.filtro) {
+        let exp = new RegExp(this.filtro.trim(), 'i');
+        return this.fotos.filter(foto => exp.test(foto.titulo));
+      }else {
+        return this.fotos;
+      }
+    }
   }
 }
 </script>
