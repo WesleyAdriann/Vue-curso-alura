@@ -5,8 +5,8 @@
     
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of filtroFotos" :key="foto.indexOf">
-        <Painel :titulo="foto.titulo">
-          <ImagemResponsiva :url="foto.url" :titulo="foto.titulo"/>
+        <Painel v-meu-transform :titulo="foto.titulo">
+          <ImagemResponsiva  :url="foto.url" :titulo="foto.titulo"/>
           <Botao
             tipo="button"
             rotulo="REMOVER"
