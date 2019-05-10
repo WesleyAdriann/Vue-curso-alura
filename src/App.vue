@@ -1,7 +1,11 @@
 <template>
   <div>
     <h1>{{ titulo }}</h1>
-    <img :src="foto.src" :alt="foto.alt"/>
+    <ul>
+      <li v-for="foto of fotos" :key="foto.alt">
+        <img :src="foto.url" :alt="foto.alt"/>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -12,10 +16,16 @@ export default {
   data () {
     return {
       titulo: "Alura app",
-      foto : {
-        src : "./assets/logo.png",
-        alt : "Logo",
-      }
+      fotos : [
+        {
+          url : "https://cdn-images-1.medium.com/max/1600/1*wqYF-8Dmh7LhtLkKfERc3Q.png",
+          titulo : "Logo"
+        },
+        {
+          url : "https://cdn-images-1.medium.com/max/1600/1*wqYF-8Dmh7LhtLkKfERc3Q.png",
+          titulo : "logo2"
+        }
+      ]
     }
   }
 }
