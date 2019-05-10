@@ -1,6 +1,8 @@
 <template>
   <div class="corpo">
     <h1 class="centralizado">{{ titulo }}</h1>
+    <input type="search" class="filtro" v-on:input="search = $event.target.value" placeholder="Busca"/>
+    {{ search }}
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of fotos" :key="foto.alt">
         <Painel :titulo="foto.titulo">
@@ -19,7 +21,8 @@ export default {
   data () {
     return {
       titulo: "Alura app",
-      fotos : []
+      fotos : [],
+      search : "",
     }
   },
   created() {
@@ -49,6 +52,10 @@ export default {
     display: inline-block;
   }
   .imagem-responsiva {
+    width: 100%;
+  }
+  .filtro {
+    display: block;
     width: 100%;
   }
 </style>
