@@ -1,12 +1,15 @@
 <template>
   <div>
-    <h1 class="centralizado">{{ titulo }}</h1>
+    <h1 class="centralizado">Alura <Applet> </Applet></h1>
     <input type="search" class="filtro" @input="filtro = $event.target.value" placeholder="Busca"/>
     <p v-show="mensagem" class="centralizado">{{ mensagem }}</p>
     <ul class="lista-fotos">
-      <li class="lista-fotos-item" v-for="foto of filtroFotos" :key="foto.indexOf">
+      <li class="lista-fotos-item" v-for="foto of filtroFotos" :key="foto._id">
         <Painel  :titulo="foto.titulo">
           <ImagemResponsiva v-meu-transform:scale.animate="1.1" :url="foto.url" :titulo="foto.titulo"/>
+          <router-link :to="{name: 'altera', params: { id : foto._id }}">
+            <Botao tipo="button" rotulo="ALTERAR"/>
+          </router-link>
           <Botao
             tipo="button"
             rotulo="REMOVER"
@@ -29,7 +32,6 @@ import FotoService from '../../domain/foto/FotoService';
 export default {
   data () {
     return {
-      titulo: "Alura app",
       fotos : [],
       filtro : "",
       mensagem : '',
@@ -38,7 +40,7 @@ export default {
   created() {
     this.service = new FotoService(this.$resource);
     this.service.lista()
-      .then(fotos => this.fotos = fotos, err => console.log(err));
+      .then(fotos => this.fotos = fotos, err => this.mensagem = err.message );
       
   },
   components: {
@@ -66,8 +68,7 @@ export default {
           this.fotos.splice(indice, 1);
           this.mensagem = "Foto removida com sucesso";
         }, err => {
-            console.log(err);
-            this.mensagem = "Não foi possivel remover";
+            this.mensagem = err.message;
         });
     }
   }
