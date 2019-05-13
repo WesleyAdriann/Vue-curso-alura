@@ -12,7 +12,7 @@ export default {
     methods : {
         disparaAcao () {
             if(this.confirmacao) {
-                if(confirm("acc")) {
+                if(confirm("Deseja Remover?")) {
                     this.$emit('botaoAtivado');
                 }
                 return;

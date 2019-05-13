@@ -2,7 +2,7 @@
   <div>
     <h1 class="centralizado">{{ titulo }}</h1>
     <input type="search" class="filtro" @input="filtro = $event.target.value" placeholder="Busca"/>
-    
+    <p v-show="mensagem" class="centralizado">{{ mensagem }}</p>
     <ul class="lista-fotos">
       <li class="lista-fotos-item" v-for="foto of filtroFotos" :key="foto.indexOf">
         <Painel  :titulo="foto.titulo">
@@ -11,7 +11,7 @@
             tipo="button"
             rotulo="REMOVER"
             @botaoAtivado="remove(foto)"
-            :confirmacao="false"
+            :confirmacao="true"
             estilo="perigo"/>
         </Painel>
 
@@ -31,6 +31,7 @@ export default {
       titulo: "Alura app",
       fotos : [],
       filtro : "",
+      mensagem : '',
     }
   },
   created() {
@@ -55,7 +56,12 @@ export default {
   },
   methods : {
     remove(foto) {
-      alert('remove' + foto.titulo);
+      this.$http.delete(`http://localhost:3000/v1/fotos/${foto._id}`)
+      .then(() => this.mensagem = "Foto removida com sucesso",
+        err => {
+          console.log(err);
+          this.mensagem = "Não foi possivel remover";
+        });
     }
   }
 }
